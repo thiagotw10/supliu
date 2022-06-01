@@ -43,5 +43,10 @@
     <script src="{{asset('dashboard/js/form-validation-script.js')}}"></script>
     <script src="{{ asset('js/cms/produtos-form.js') }}"></script>
 
+    <script src="{{asset('js/cms/js-validation.js')}}"></script>
+    <script src="{{asset('js/cms/alerta-de-salvamento.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </body>
 </html>

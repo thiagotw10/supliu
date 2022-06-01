@@ -1,104 +1,5 @@
 var  array = []
 var c = 0
-    function caracteristica(){
-
-                    var elementoPai = document.getElementById('caracteristicas');
-
-                            let div = document.createElement("div")
-                            div.style.display = 'flex';
-                            elementoPai.appendChild(div)
-
-
-                            let novoInput = document.createElement("input");
-                            novoInput.type = "text";
-                            novoInput.style.width = '177px'
-                            novoInput.name = "caracteristicas[]"
-                            novoInput.className = "form-control";
-                            div.appendChild(novoInput);
-
-
-                            let divbotao = document.createElement("div")
-                            divbotao.className = "botao m-2"
-                            div.appendChild(divbotao)
-
-                            let botao = document.createElement("div")
-                            botao.style.padding = "3px 10px"
-                            botao.className = "btn-danger"
-                            botao.style.cursor = "pointer"
-                            botao.innerHTML = '-'
-                            botao.onclick = function(){
-                                div.parentNode.removeChild(div)
-                            }
-                            divbotao.appendChild(botao)
-
-    }
-
-    function link(){
-
-        var elementoPai = document.getElementById('link');
-
-                let div = document.createElement("div")
-                div.style.display = 'flex';
-                elementoPai.appendChild(div)
-
-
-                let novoInput = document.createElement("input");
-                novoInput.type = "text";
-                novoInput.style.width = '500px'
-                novoInput.name = "link[]"
-                novoInput.className = "form-control";
-                div.appendChild(novoInput);
-
-
-                let divbotao = document.createElement("div")
-                divbotao.className = "botao m-2"
-                div.appendChild(divbotao)
-
-                let botao = document.createElement("div")
-                botao.style.padding = "3px 10px"
-                botao.className = "btn-danger"
-                botao.style.cursor = "pointer"
-                botao.innerHTML = '-'
-                botao.onclick = function(){
-                    div.parentNode.removeChild(div)
-                }
-                divbotao.appendChild(botao)
-
-}
-
-
-    function opcionais(){
-                        let elementoPai = document.getElementById('opcionais')
-
-                        let div = document.createElement("div")
-                        div.style.display = 'flex';
-                        elementoPai.appendChild(div)
-
-
-                        let novoInput = document.createElement("input");
-                        novoInput.type = "text";
-                        novoInput.style.width = '177px'
-                        novoInput.name = "opcionais[]"
-                        novoInput.className = "form-control";
-                        div.appendChild(novoInput);
-
-
-                        let divbotao = document.createElement("div")
-                        divbotao.className = "botao m-2"
-                        div.appendChild(divbotao)
-
-                        let botao = document.createElement("div")
-                        botao.style.padding = "3px 10px"
-                        botao.className = "btn-danger"
-                        botao.style.cursor = "pointer"
-                        botao.innerHTML = '-'
-                        botao.onclick = function(){
-                            div.parentNode.removeChild(div)
-                        }
-                        divbotao.appendChild(botao)
-
-    }
-
 
     function informacoesGerais(){
                             let elementoPai = document.getElementById('informacoesGerais')
@@ -246,10 +147,8 @@ var c = 0
                 console.log(img)
                 console.log(id)
                 swal.fire({
-                    title: 'Deseja realmente excluir essa imagem?',
+                    title: 'Deseja realmente excluir esse album?',
                     text: 'Você não poderá reverter isso!',
-                    imageUrl: window.location.origin + '/img/produtos/'+img,
-                    imageHeight: 100,
                     showCancelButton: true,
                     confirmButtonText: 'Sim, exclua-o!',
                     cancelButtonText: 'Cancelar'
@@ -263,7 +162,7 @@ var c = 0
 
             function removeRegister(id) {
 
-                axios.get(window.location.origin + '/cms/produtos/imagem/delete/'+id)
+                axios.get(window.location.origin + '/album/delete/'+id)
                 .then(function (response) {
 
                     swal.fire({

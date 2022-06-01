@@ -37,7 +37,7 @@
                         <tr>
                         <td><p style="margin-top: 5px; font-weight: bold;">{{$album->nome_album}}</p></td>
                         <td id="detalhes" style="display: flex; justify-content:center; align-items:center; border:none; padding: 16px 0; ">
-                            <a onmouseover="descricao(this)" aria-label="Editar" style="position: relative; margin: 0 2px" href="{{url('album/edit/'.$album->id)}}">
+                            <a style="position: relative; margin: 0 2px" href="{{url('album/edit/'.$album->id)}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1F3F7C" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
@@ -45,7 +45,7 @@
                                 <line x1="16" y1="5" x2="19" y2="8" />
                                 </svg>
                             </a>
-                            <div onmouseout="descricao(this)" aria-label="Excluir" style="cursor: pointer; position:relative; margin: 0 2px"  onclick="okDelete(<?= $album->id ?>)">
+                            <div style="cursor: pointer; position:relative; margin: 0 2px"  onclick="okDelete(<?= $album->id ?>)">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="29" height="29" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ff2825" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                     <line x1="4" y1="7" x2="20" y2="7" />

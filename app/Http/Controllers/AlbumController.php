@@ -6,6 +6,7 @@ use App\Models\Album;
 use App\Models\Faixas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\validationRequest;
 
 class AlbumController extends Controller
 {
@@ -92,10 +93,14 @@ class AlbumController extends Controller
         return view('dashboard.album.album-form');
     }
 
-    public function albumDados(Request $request){
+    public function albumDados(validationRequest $request){
 
        $faixavar = [];
        $duracaovar = [];
+
+       if($request->faixa[0] == null || $request->duracao[0] == null){
+           return redirect('album-form');
+       }
 
        $album = Album::create([
             'nome_album' => $request->nome
@@ -120,7 +125,8 @@ class AlbumController extends Controller
             ]);
         }
 
-        return view('dashboard.album.album-form');
+        $request->session()->flash('success', 'album');
+        return redirect('album');
     }
 
 
@@ -129,4 +135,14 @@ class AlbumController extends Controller
         $faixa = DB::table('faixas')->where('album_id', $album->id)->get();
         return view('dashboard.album.album-form', compact('album', 'faixa'));
     }
+
+
+    public function albumDelete($id){
+        $album = Album::find($id);
+
+        $album->delete();
+
+        return redirect('album');
+    }
+
 }

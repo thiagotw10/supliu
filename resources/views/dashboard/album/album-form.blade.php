@@ -9,38 +9,17 @@
 
 
 <section id="container" class="">
-      <!--header start-->
+
       @include('templates.header')
-      <!--header end-->
-      <!--sidebar start-->
+
       @include('templates.menu')
-      <!--sidebar end-->
-      <!--main content start-->
+
       <section id="main-content">
 
 
           <section class="wrapper">
                  <div class="row">
                       <section class="card" style="width: 100%;">
-                                      @if ($errors->any())
-                                      <div class="container-modal-alerta" style="display: flex; justify-content:center; align-items:center; width: 100%; height: 100vh; position:fixed; left:0; top: 0; z-index: 9999999; background-color:#2a3542d5;" id="modalErro">
-                                            <div onclick="modalErro()" style="position: absolute; right: 10px; top: 10px; cursor:pointer;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-down-left-circle" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <circle cx="12" cy="12" r="9" />
-                                                <line x1="15" y1="9" x2="9" y2="15" />
-                                                <polyline points="15 15 9 15 9 9" />
-                                                </svg>
-                                            </div>
-                                            <div class="alert alert-danger text-center" style="display: flex; justify-content:center; align-items:center; flex-direction:column;">
-
-                                                    @foreach ($errors->all() as $error)
-                                                        <p style="margin-top: 0 !important; margin-bottom: 0 !important">{{ $error }}</p>
-                                                    @endforeach
-
-                                            </div>
-                                     </div>
-                                       @endif
                           <header class="card-header">
                               Album
                           </header>
@@ -59,9 +38,12 @@
                                                 <label for="cname" class="control-label col-lg-2" style="display: flex; max-width: 321px !important;">Nome do Album</label>
                                                 <div class="labelx col-lg-10">
                                                     @if(isset($album))
-                                                    <input style="width: 396px;" class=" form-control" id="nome" name="nome" minlength="2" value="{{$album->nome_album}}" type="text" required />
+                                                    <input style="width: 396px;" class=" form-control" id="nome" name="nome" minlength="2" value="{{$album->nome_album}}" type="text"/>
                                                     @else
-                                                    <input style="width: 396px;"  class=" form-control" id="nome" name="nome" minlength="2" type="text" required />
+                                                    <input style="width: 396px;"  class=" form-control" id="nome" name="nome" value="{{old('nome')}}" minlength="2" type="text"/>
+                                                    @endif
+                                                    @if ($errors->any())
+                                                        <p style="margin-top: 0 !important; margin-bottom: 0 !important; color: red">{{ $errors->first('nome') }}</p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -91,8 +73,8 @@
                                                                     <div class="flex-info d-flex">
 
 
-                                                                        <input type="text" class="form-control" id="informacoesgerais" value="{{ $fd->nome_faixa }}" name="faixa[]" id="" disabled required>
-                                                                        <input type="text" class="form-control" id="informacoesgerais" value="{{ $fd->duracao_faixa }}" name="duracao[]" id="" disabled required>
+                                                                        <input type="text" class="form-control" id="informacoesgerais" value="{{ $fd->nome_faixa }}" name="faixa[]" id="" disabled>
+                                                                        <input type="text" class="form-control" id="informacoesgerais" value="{{ $fd->duracao_faixa }}" name="duracao[]" id="" disabled>
                                                                         <div class="botao m-2">
                                                                             <div class="btn-danger" style="padding: 3px 10px 3px 10px; cursor:pointer;" onclick="deleteInformacoes(<?= $fd->id ?>)">
                                                                                 -</div>
@@ -107,8 +89,8 @@
                                                         </div>
                                                         @else
                                                         <div class="infor-gerais d-flex">
-                                                            <input type="text" class="form-control" id="informacoesgerais" name="faixa[]" required>
-                                                            <input type="text" class="form-control" id="informacoesgerais" name="duracao[]" required>
+                                                            <input type="text" class="form-control" id="informacoesgerais"  name="faixa[]">
+                                                            <input type="text" class="form-control" id="informacoesgerais"  name="duracao[]">
                                                             <div class="botao m-2">
                                                                 <div class="btn-success" style="padding: 3px 8px 3px 8px; cursor:pointer;" onclick="informacoesGerais()">+</div>
                                                             </div>
@@ -116,7 +98,15 @@
                                                         <div id="informacoesGerais"></div>
                                                         @endif
                                                     </div>
-                                                </div>
+                                                    @if ($errors->any())
+                                                    <div class="class" style="display: flex; width: 372px;">
+
+                                                            <p class="control-label col-lg-6 " style="margin-top: 0 !important; margin-bottom: 0 !important; color: red">{{ $errors->first('faixa') }}</p>
+                                                            <p class="control-label col-lg-6 " style="margin-top: 0 !important; margin-bottom: 0 !important; color: red">{{ $errors->first('duracao') }}</p>
+
+                                                    </div>
+                                                    @endif
+                                            </div>
                                       </div>
 
 
@@ -174,11 +164,6 @@
 
   </style>
 
-
-
-
-<script src="{{asset('js/cms/js-validation.js')}}"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 

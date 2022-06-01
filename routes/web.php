@@ -19,3 +19,4 @@ Route::get('/album', [AlbumController::class, 'album'])->name('album');
 Route::get('/album-form', [AlbumController::class, 'albumForm'])->name('albumForm');
 Route::post('/album-form', [AlbumController::class, 'albumDados'])->name('cadastro.add');
 Route::get('/album/edit/{id}', [AlbumController::class, 'albumEdit'])->name('album.edit');
+Route::get('/album/delete/{id}', [AlbumController::class, 'albumDelete'])->name('album.delete');
