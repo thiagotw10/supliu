@@ -15,5 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [FaixasController::class, 'album']);
-Route::get('/album', [AlbumController::class, 'album']);
-Route::get('/album-form', [AlbumController::class, 'albumForm']);
+Route::get('/album', [AlbumController::class, 'album'])->name('album');
+Route::get('/album-form', [AlbumController::class, 'albumForm'])->name('albumForm');
+Route::post('/album-form', [AlbumController::class, 'albumDados'])->name('cadastro.add');
+Route::get('/album/edit/{id}', [AlbumController::class, 'albumEdit'])->name('album.edit');

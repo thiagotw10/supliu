@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Faixas extends Model
 {
-    use HasFactory;
+    protected $fillable = ['album_id', 'nome_faixa', 'duracao_faixa'];
 }
