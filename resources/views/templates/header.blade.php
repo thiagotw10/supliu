@@ -30,7 +30,7 @@
                           <div class="log-arrow-up"></div>
                           <li><p>Email</p><a href="">{{ session()->get('email') }}</a></li>
 
-                          <li><a href="">Sair</a></li>
+                          <li><a href="{{route('sair')}}">Sair</a></li>
                       </ul>
                   </li>
 

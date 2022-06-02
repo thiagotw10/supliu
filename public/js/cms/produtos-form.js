@@ -256,7 +256,7 @@ var c = 0
 
                 console.log(id)
                 swal.fire({
-                    title: 'Deseja realmente excluir essa informacão?',
+                    title: 'Deseja realmente excluir essa faixa?',
                     text: 'Você não poderá reverter isso!',
                     showCancelButton: true,
                     confirmButtonText: 'Sim, exclua-o!',
@@ -272,7 +272,7 @@ var c = 0
 
             function removeInformacao(id) {
 
-                axios.get(window.location.origin + '/cms/produtos/informacoes/delete/'+id)
+                axios.get(window.location.origin + '/album/delete/faixa/'+id)
                 .then(function (response) {
 
                     swal.fire({

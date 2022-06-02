@@ -1,12 +1,14 @@
 @extends('templates.corpo')
-@section('title', 'Albuns Form')
+@section('title', 'Álbuns Form')
 @section('album-form')
 
 @include('templates.header')
 
 @include('templates.menu')
 
-
+@if (session('success'))
+                 <input type="text" id="sucesso" hidden value="{{ session('success') }}">
+@endif
 
 <section id="container" class="">
 
@@ -21,12 +23,12 @@
                  <div class="row">
                       <section class="card" style="width: 100%;">
                           <header class="card-header">
-                              Album
+                              Álbum
                           </header>
                           <div class="card-body">
                               <div class=" form">
-                              @if(isset($dados))
-                              <form action="{{url('cms/cadastro/update/'.$dados->id)}}" method="POST" enctype="multipart/form-data">
+                              @if(isset($album))
+                              <form action="{{url('album/update/'.$album->id)}}" method="POST" enctype="multipart/form-data">
                               @else
                               <form action="{{route('cadastro.add')}}" method="POST" id="formCadastro" enctype="multipart/form-data">
                               @endif
@@ -35,7 +37,7 @@
 
                                       <div class="container-grupo" style="display: flex; width: 100%; justify-content:center; flex-wrap:wrap;">
                                             <div class="form-group">
-                                                <label for="cname" class="control-label col-lg-2" style="display: flex; max-width: 321px !important;">Nome do Album</label>
+                                                <label for="cname" class="control-label col-lg-2" style="display: flex; max-width: 321px !important;">Nome do Álbum</label>
                                                 <div class="labelx col-lg-10">
                                                     @if(isset($album))
                                                     <input style="width: 396px;" class=" form-control" id="nome" name="nome" minlength="2" value="{{$album->nome_album}}" type="text"/>
@@ -49,14 +51,14 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <div class="class" style="display: flex; width: 372px;">
+                                                <div class="class" style="display: flex; width: 371px;">
                                                      <label for="ccomment" class="control-label col-lg-6 d-flex">Nome da faixa
                                                     </label>
                                                     <label for="ccomment" class="control-label col-lg-6 d-flex">Duração
                                                     </label>
                                                     @if(isset($album))
                                                         <div class="control-label d-flex mb-2" style="width: 50px;">
-                                                            <div class="btn-success" style="padding: 3px 8px 3px 8px; cursor:pointer;" onclick="informacoesGerais()">+</div>
+                                                            <div class="btn-success" style="padding: 0px 8px 0px 8px; cursor:pointer;" onclick="informacoesGerais()">+</div>
                                                         </div>
                                                     @endif
                                                 </div>
@@ -73,8 +75,8 @@
                                                                     <div class="flex-info d-flex">
 
 
-                                                                        <input type="text" class="form-control" id="informacoesgerais" value="{{ $fd->nome_faixa }}" name="faixa[]" id="" disabled>
-                                                                        <input type="text" class="form-control" id="informacoesgerais" value="{{ $fd->duracao_faixa }}" name="duracao[]" id="" disabled>
+                                                                        <input type="text" style="width: 174px;" class="form-control" id="informacoesgerais" value="{{ $fd->nome_faixa }}" name="faixa[]" id="" disabled>
+                                                                        <input type="text" style="width: 174px;" class="form-control" id="informacoesgerais" value="{{ $fd->duracao_faixa }}" name="duracao[]" id="" disabled>
                                                                         <div class="botao m-2">
                                                                             <div class="btn-danger" style="padding: 3px 10px 3px 10px; cursor:pointer;" onclick="deleteInformacoes(<?= $fd->id ?>)">
                                                                                 -</div>
@@ -89,8 +91,8 @@
                                                         </div>
                                                         @else
                                                         <div class="infor-gerais d-flex">
-                                                            <input type="text" class="form-control" id="informacoesgerais"  name="faixa[]">
-                                                            <input type="text" class="form-control" id="informacoesgerais"  name="duracao[]">
+                                                            <input type="text" style="width: 174px;" class="form-control" id="informacoesgerais"  name="faixa[]">
+                                                            <input type="text" style="width: 174px;" class="form-control" id="tel"  name="duracao[]">
                                                             <div class="botao m-2">
                                                                 <div class="btn-success" style="padding: 3px 8px 3px 8px; cursor:pointer;" onclick="informacoesGerais()">+</div>
                                                             </div>
@@ -99,7 +101,7 @@
                                                         @endif
                                                     </div>
                                                     @if ($errors->any())
-                                                    <div class="class" style="display: flex; width: 372px;">
+                                                    <div class="class" style="display: flex; width: 409px;">
 
                                                             <p class="control-label col-lg-6 " style="margin-top: 0 !important; margin-bottom: 0 !important; color: red">{{ $errors->first('faixa') }}</p>
                                                             <p class="control-label col-lg-6 " style="margin-top: 0 !important; margin-bottom: 0 !important; color: red">{{ $errors->first('duracao') }}</p>

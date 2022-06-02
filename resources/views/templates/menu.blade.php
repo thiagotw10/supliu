@@ -6,7 +6,7 @@
 
 
 
-                            <li><a  href=""><i class="fa fa-book"></i> Albums </a></li>
+                            <li><a  href=""><i class="fa fa-book"></i> Álbuns </a></li>
 
 
 

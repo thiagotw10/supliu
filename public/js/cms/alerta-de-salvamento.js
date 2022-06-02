@@ -4,7 +4,34 @@ window.onload = function(){
         swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Album adicionado com SUCESSO!!',
+            title: 'Álbum adicionado com SUCESSO!!',
+            showConfirmButton: false,
+            timer: 2500
+        })
+    }
+    if(sucesso == 'albumUpdate'){
+        swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Álbum editado com SUCESSO!!',
+            showConfirmButton: false,
+            timer: 2500
+        })
+    }
+    if(sucesso == 'entrar'){
+        swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Login feito com SUCESSO!!',
+            showConfirmButton: false,
+            timer: 2500
+        })
+    }
+    if(sucesso == 'sair'){
+        swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Usuário desconectado com SUCESSO!!',
             showConfirmButton: false,
             timer: 2500
         })

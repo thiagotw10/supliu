@@ -13,7 +13,7 @@ class AlbumController extends Controller
     public function album(Request $request){
 
 
-        function form_consulta($url, $campos = [], $campo = "", $valor = "", $limite = 10, $titulo = "Albums") {
+        function form_consulta($url, $campos = [], $campo = "", $valor = "", $limite = 10, $titulo = "Álbuns") {
 
             $html = "<section class=\"panel\">";
             $html .= "<header class=\"panel-heading\">$titulo</header>";
@@ -51,7 +51,7 @@ class AlbumController extends Controller
             $html .= "<input type=\"text\" name=\"c_valor\" placeholder=\"Digite o que você quer encontrar\" class=\"form-control\" value=\"$valor\" />";
             $html .= "<span class=\"input-group-btn d-flex\">";
             $html .= "<button type=\"submit\" onmouseover=\"descricao(this)\" aria-label=\"Pesquisar\" class=\"pesquisar\"><i class=\"fa fa-search\"></i></button>";
-            $html .= "<a href=\"cadastro\" style=\"padding: 5px 10px 5px 10px; background-color:#1F3F7C; border-radius: 5px; color: white; display: flex; justify-content: center; align-items: center; \"> Limpar </a>";
+            $html .= "<a href=\"album\" style=\"padding: 5px 10px 5px 10px; background-color:#1F3F7C; border-radius: 5px; color: white; display: flex; justify-content: center; align-items: center; \"> Limpar </a>";
             $html .= "</span>";
             $html .= "</div>";
             $html .= "</div>";
@@ -66,7 +66,7 @@ class AlbumController extends Controller
 
         }
 
-        $camposBusca = 'nome';
+        $camposBusca = 'nome_album';
 
         if($request->query('c_valor') != null){
             $term = $request->query('c_valor');
@@ -74,15 +74,15 @@ class AlbumController extends Controller
             $linha = $request->query('c_limite');
 
 
-            $dados =  DB::table('usuarios')->where($campo, 'LIKE', $term.'%')->paginate($linha);
+            $dados =  DB::table('albums')->where($campo, 'LIKE', $term.'%')->paginate($linha);
 
             $camposBusca = $request->query('c_campo');
 
         }else{
-            $dados = Album::paginate(5);
+            $dados = Album::paginate(3);
         }
 
-        $html = form_consulta(route('album'), [$camposBusca =>($request->query('c_campo'))? $request->query('c_campo'): 'nome', 'nome' => 'nome', 'email' => 'email', 'nivel' => 'nivel'], '', $request->query('c_valor'), ($request->query('c_limite')? $request->query('c_limite'): '10'));
+        $html = form_consulta(route('album'), [$camposBusca =>($request->query('c_campo'))? $request->query('c_campo'): 'nome', 'nome_album' => 'nome'], '', $request->query('c_valor'), ($request->query('c_limite')? $request->query('c_limite'): '10'));
 
 
 
@@ -136,6 +136,45 @@ class AlbumController extends Controller
         return view('dashboard.album.album-form', compact('album', 'faixa'));
     }
 
+    public function albumUpdate(Request $request, $id){
+        $album = Album::find($id);
+        $faixavar = [];
+        $duracaovar = [];
+
+        if($request->faixa != null){
+
+
+        foreach($request->faixa as $chave => $faixa){
+            $faixavar[$chave] = $faixa;
+        }
+
+        foreach($request->duracao as $chave => $duracao){
+            $duracaovar[$chave] = $duracao;
+        }
+
+        $combine = array_combine($faixavar, $duracaovar);
+
+        foreach($combine as $chave => $duracao){
+            Faixas::create([
+                'album_id' => $id,
+                'nome_faixa' => $chave,
+                'duracao_faixa' => $duracao
+            ]);
+        }
+
+        }
+
+        if($request->nome != ''){
+            $album->update([
+                'nome_album' => $request->nome
+            ]);
+        }
+
+        $request->session()->flash('success', 'albumUpdate');
+        return redirect('album/edit/'.$id);
+
+    }
+
 
     public function albumDelete($id){
         $album = Album::find($id);
@@ -143,6 +182,13 @@ class AlbumController extends Controller
         $album->delete();
 
         return redirect('album');
+    }
+
+
+    public function faixaDelete($id){
+        $faixa = Faixas::find($id);
+
+        $faixa->delete();
     }
 
 }

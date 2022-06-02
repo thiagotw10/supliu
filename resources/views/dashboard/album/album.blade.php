@@ -1,5 +1,5 @@
 @extends('templates.corpo')
-@section('title', 'Albuns')
+@section('title', 'Álbuns')
 @section('album')
 @include('templates.header')
 
@@ -18,7 +18,7 @@
 
             <div class="panel-body pull-right" style="height: 100px; width: 100%; display:flex; justify-content:space-between; align-items:center;">
                 <h5>Registros</h5>
-                <a href="{{route('cadastro.add')}}" class="btn btn-orange" style="background-color: #1F3F7C; color: white"> <i class="fa fa-plus"></i>Adicionar album</a>
+                <a href="{{route('cadastro.add')}}" class="btn btn-orange" style="background-color: #1F3F7C; color: white"> <i class="fa fa-plus"></i>Adicionar álbum</a>
             </div>
 
             @if (session('success'))
@@ -28,7 +28,7 @@
             <table class="table table-striped table-bordered">
                 <thead  style="background-color: #1F3F7C; color: white;">
                     <tr>
-                    <th scope="col">Album</th>
+                    <th scope="col">Álbum</th>
                     <th class="text-center" scope="col">Ações</th>
                     </tr>
                 </thead>
